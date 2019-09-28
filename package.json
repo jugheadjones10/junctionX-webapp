@@ -7,5 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "box-node-sdk": "^1.29.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "googleapis": "^43.0.0",
+    "mongodb": "^3.3.2",
+    "readline": "^1.3.0"
+  }
 }
