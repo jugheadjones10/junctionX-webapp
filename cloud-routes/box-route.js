@@ -10,7 +10,7 @@ var sdk = new BoxSDK({
     clientID: 'u4vxh442ztjdatk0rsjl814io704bpne',
     clientSecret: 'l6MflOkFqXlPbtgJ2rBoAIRls3IOmRgE'
 })
-var client = sdk.getBasicClient("6uyO66UXi8YPe3O2D0NaUVGCFZybr5P8")
+var client = sdk.getBasicClient("wM4VVtiXeGxkqWUzGRAjMFIhFwSHsZ8S")
 var stream = fs.createReadStream('keys/send-box-keys.json');
 // var folderID = '0'
 
@@ -21,12 +21,12 @@ router.get('/upload', function (req, res) {
         return folder.item_collection.entries[0].id
     }).then(function (folderID) {
         client.folders.get(folderID).then(function (folder) {
-            if (folder.item_collection.entries.length !== 0) {
-                client.files.delete(folder.item_collection.entries[0].id)
-                    .then(() => {
-                        // deletion succeeded — no value returned
-                    })
-            }
+            // if (folder.item_collection.entries.length !== 0) {
+            //     client.files.delete(folder.item_collection.entries[0].id)
+            //         .then(() => {
+            //             // deletion succeeded — no value returned
+            //         })
+            // }
             return folderID
         }).then(function (folderID) {
             client.files.uploadFile(folderID, 'send-box-keys.json', stream)

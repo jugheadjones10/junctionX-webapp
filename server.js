@@ -14,6 +14,9 @@ const stringHash = require("string-hash")
 const jsencrypt = require("js-encrypt")
 // Encryption libraries
 
+const request = require("request")
+// Require
+
 
 var crypt = new jsencrypt.JSEncrypt()
 crypt.setPublicKey("MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKNQ+Fz5mdAOHMprtJEOMeKD1Gleuix5UzFo / wX4I++E / UaSdFVjR3DEhictmKbNRhgf8yw54n2YCLrC2J1OnbUCAwEAAQ ==")
@@ -42,22 +45,59 @@ app.use("/box", boxRoute)
 app.use("/mongo", mongoRoute)
 app.use("/google", googleRoute)
 
+var firstEncrypt
+var arrayMixed
+var arrayShuffled
 
 app.get("/first-encrypt/:password", function(req, res){
-    var firstEncrpyt = crypt.encrypt(req.params.password)
-    res.json(firstEncrpyt)
+    firstEncrypt = crypt.encrypt(req.params.password)
+    res.json(firstEncrypt)
 })
 
-app.get("/first-encrypt-split/:firstEncrypt", function(req, res){
-    var first = req.params.firstEncrypt
-    var firstEncryptSplitted = randomArrSplitter(first.split(""))
-    res.send(firstEncryptSplitted)
+app.get("/first-encrypt-split", function(req, res){
+    arrayMixed = randomArrSplitter(firstEncrypt.split(""))
+    res.json(arrayMixed)
 })
 
-app.get("/hash-individual/:mixedArray", function(req, res){
-    var mixedArray = req.params.mixedArray.toArray()
-    var hashedArray = mixedArray.map(x => hasha(x))
-    res.send(hashedArray)
+
+app.get("/hash-individual", function(req, res){
+    var hashedArray = arrayMixed.map(x => hasha(x))
+    res.json(hashedArray)
+})
+
+app.get("/mix-encrypted-chunks", function(req, res){
+    arrayShuffled = shuffle(arrayMixed)
+    res.json(arrayShuffled)
+})
+
+app.get("/to-files", function (req, res) {
+    var first = arrayShuffled.splice(0, 4)
+
+    for(var i = 0; i < first.length; i++){
+        fs.writeFile("keys/send-box-keys.json", JSON.stringify(first[i]), function(err){
+            if (err) throw err
+            console.log('Replaced!')
+        }).then(function(){
+            request('/box/upload', function (error, response, body) {
+               
+            })
+        })
+
+       
+    }
+
+    // var second = arrayShuffled.splice(0, 4)
+    // for (var i = 0; i < second.length; i++) {
+
+    // }
+
+    // var third = arrayShuffled.splice(0, 4)
+    // for (var i = 0; i < third.length; i++) {
+
+    // }
+
+
+    res.send("Going")
 })
 
 function randomArrSplitter(arr) {
