@@ -10,7 +10,7 @@ var sdk = new BoxSDK({
     clientID: 'u4vxh442ztjdatk0rsjl814io704bpne',
     clientSecret: 'l6MflOkFqXlPbtgJ2rBoAIRls3IOmRgE'
 })
-var client = sdk.getBasicClient("WkZIDDI5nPe9Msi3WUwyRRNuXxMitzFU")
+var client = sdk.getBasicClient("6uyO66UXi8YPe3O2D0NaUVGCFZybr5P8")
 var stream = fs.createReadStream('keys/send-box-keys.json');
 // var folderID = '0'
 

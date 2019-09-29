@@ -243,3 +243,26 @@ img, svg {
 	height: 1.6em;
 	margin: 0 0.5em 0 0;
 }
+
+.MainBody {
+	display: flex;
+	align-items: center;
+}
+
+.blink_me {
+	animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+	50% {
+	  opacity: 0;
+	}
+  }
+
+.user-input {
+	grid-column: span 2;
+	padding-left: 10px;
+	height: 100px;
+	width: 500px;
+	font-size: 25px;
+}
