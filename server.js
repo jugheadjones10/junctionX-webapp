@@ -70,21 +70,21 @@ app.get("/mix-encrypted-chunks", function(req, res){
     res.json(arrayShuffled)
 })
 
-app.get("/to-files", function (req, res) {
-    var first = arrayShuffled.splice(0, 4)
+// app.get("/to-files", function (req, res) {
+//     var first = arrayShuffled.splice(0, 4)
 
-    for(var i = 0; i < first.length; i++){
-        fs.writeFile("keys/send-box-keys.json", JSON.stringify(first[i]), function(err){
-            if (err) throw err
-            console.log('Replaced!')
-        }).then(function(){
-            request('/box/upload', function (error, response, body) {
+//     for(var i = 0; i < first.length; i++){
+//         fs.writeFile("keys/send-box-keys.json", JSON.stringify(first[i]), function(err){
+//             if (err) throw err
+//             console.log('Replaced!')
+//         }).then(function(){
+//             request('/box/upload', function (error, response, body) {
                
-            })
-        })
+//             })
+//         })
 
        
-    }
+//     }
 
     // var second = arrayShuffled.splice(0, 4)
     // for (var i = 0; i < second.length; i++) {
@@ -97,8 +97,8 @@ app.get("/to-files", function (req, res) {
     // }
 
 
-    res.send("Going")
-})
+    // res.send("Going")
+// })
 
 function randomArrSplitter(arr) {
     var i = 0;
